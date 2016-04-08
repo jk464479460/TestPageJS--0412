@@ -1,18 +1,18 @@
 ﻿$(function() {
     var cookie = getCookie('admin');
-    
-    if (cookie == null)
-        {}//location.href = "../login.htm";
+
+    if (cookie == null) {
+    } //location.href = "../login.htm";
     else {
-       
+
     }
-     $('#loginOut').live('click', function() {
+    $('#loginOut').live('click', function() {
         delCookie('admin');
-     });
+    });
 
     var dates = $("#startDate,#endDate");
     dates.datepicker({
-        onSelect: function (selectedDate) {
+        onSelect: function(selectedDate) {
             var option = this.id == "startDate" ? "minDate" : "maxDate";
             dates.not(this).datepicker("option", option, selectedDate);
         },
@@ -26,7 +26,7 @@
     });
 
     /*修改数据保存*/
-    $('.btModif').live('click', function () {
+    $('.btModif').live('click', function() {
         var timeType = $("#timeType").val();
         var timeId = $(this).attr('timeId');
         var devId = $(this).attr('devId');
@@ -37,18 +37,18 @@
             url: page1.url().UpdateInsertEnergyData,
             type: "POST",
             dataType: "json",
-            contentType:'application/json',
-            data:dataStr,// { "Inputs":  dataStr},
-            success: function (data, textStatus) {
+            contentType: 'application/json',
+            data: dataStr, // { "Inputs":  dataStr},
+            success: function(data, textStatus) {
                 var obj = JSON.parse(data);
                 if (obj.Exception.Success) {
                     alert("保存数据成功");
                     $('.btModif').css('display', 'none');
-                } else {    
+                } else {
                     alert("保存数据失败");
                 }
             },
-            error: function (data, status, e) {
+            error: function(data, status, e) {
                 alert("错误信息：" + e);
             }
         });
@@ -57,23 +57,23 @@
         page1.QueryEnergyData(1);
     });
 
-    $(".editeTd").live("dblclick", function () {
+    $(".editeTd").live("dblclick", function() {
         oldVal = $(this).html(); //获取旧数据
         objTd = this;
         ShowDiv();
     });
-    $(".editeTd1").live("dblclick", function () {
+    $(".editeTd1").live("dblclick", function() {
         oldVal = $(this).html(); //获取旧数据
         objTd = this;
         ShowDiv();
     });
 
-    $("#firstPage").click(function () {
+    $("#firstPage").click(function() {
         queryData.Page.CurrPage = 1;
         page1.QueryEnergyData(1);
     });
     //
-    $("#previousPage").click(function () {
+    $("#previousPage").click(function() {
         var pPage = $("#currPage").text();
         if (pPage <= 1) {
             alert("已经是首页");
@@ -82,21 +82,21 @@
         queryData.Page.CurrPage = pPage - 1;
         page1.QueryEnergyData(queryData.Page.CurrPage);
     });
-    $("#nextPage").click(function () {
-        var pPage = parseInt( $("#currPage").text() );
+    $("#nextPage").click(function() {
+        var pPage = parseInt($("#currPage").text());
         var totalNum = $("#totalPage").text();
         if (pPage >= totalNum) {
             alert("已经是尾页");
             return;
         }
-        
+
         queryData.Page.CurrPage = pPage + 1;
         page1.QueryEnergyData(queryData.Page.CurrPage);
 
     });
 
 
-    $("#lastPage").click(function () {
+    $("#lastPage").click(function() {
         var totalNum = $("#totalPage").text();
         queryData.Page.CurrPage = totalNum;
         page1.QueryEnergyData(totalNum);
@@ -104,7 +104,7 @@
     /*跳转指定页面*/
     $("#GetSpeciPage").click(function() {
         var speciNum = $("#numPage").val();
-        if (speciNum == "" || speciNum==null) {
+        if (speciNum === "" || speciNum == null) {
             layer.msg('页码未填写！');
             return;
         }
@@ -123,21 +123,24 @@
         page1.QueryEnergyData(queryData.Page.CurrPage);
     });
     /*导出excel数据*/
-    $('#btExport').click(function () {
+    $('#btExport').click(function() {
         page1.ExcelExport();
     });
 
     /*绑定设备*/
     page1.initDevList();
 
-    $("#btQuery").click(function () {
-        if ($("#startDate").val().length == 0 || $("#endDate").val().length == 0) {
+    $("#btQuery").click(function() {
+        if ($("#startDate").val().length === 0 || $("#endDate").val().length === 0) {
             layer.msg('日期未选择');
             return;
         }
         page1.QueryEnergyData(1);
     });
 
+    $("#jumpChart").click(function() {
+        window.open("html/chart.htm?key=" + iputStrGlobal, "_blank");
+    });
 });//end-load
 
 function Page1() {
@@ -259,7 +262,7 @@ Page1.prototype = {
             iputStr = eval("(" + queryData + ")");
         else
             iputStr = JSON.stringify(queryData);
-
+        iputStrGlobal = iputStr;
         $.ajax({
             url: this.url().GetEnergyDataList,
             type: "POST",
@@ -355,3 +358,4 @@ var pageii;
 var oldVal, newVal;
 var objTd;
 var dataStr;
+var iputStrGlobal;
