@@ -26,5 +26,10 @@ namespace WebReport.Interface
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Bare)]
         string ExportExcel();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+          BodyStyle = WebMessageBodyStyle.Bare)]
+        string GetChartData(QueryEnergyStatistic query);
     }
 }

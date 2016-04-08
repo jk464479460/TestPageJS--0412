@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.ServiceModel.Activation;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Caching;
 using Newtonsoft.Json;
 using WebReport.Dal;
 using WebReport.DataContact;
@@ -25,8 +28,13 @@ namespace WebReport.Bll
     public class EnergyDataBll : IEnergyDataBll
     {
         private readonly HttpContext _context = HttpContext.Current;
+
         public string GetEnergyDataList(QueryEnergyStatistic queryObj)
         {
+            Task.Factory.StartNew(() =>
+            {
+                SetChartCache(queryObj);
+            });
             var query = _context.Request.Form["inputs"];
             var result = new ResultEnergyDataList();
             try
@@ -74,6 +82,69 @@ namespace WebReport.Bll
             return JsonConvert.SerializeObject(result);
         }
 
+        public string GetChartData(QueryEnergyStatistic query)
+        {
+            //ResultEnergyDataList
+            if ((HttpRuntime.Cache[JsonConvert.SerializeObject(query)]) != null)
+            {
+                var result = HttpRuntime.Cache[JsonConvert.SerializeObject(query)];
+                return JsonConvert.SerializeObject(result);
+            }
+            return "";
+        }
+
+        private void SetChartCache(QueryEnergyStatistic query)
+        {
+            if ((HttpRuntime.Cache[JsonConvert.SerializeObject(query)]) != null)
+            {
+                return;
+            }
+            var result = new ResultEnergyDataList();
+            try
+            {
+                var obj = query;
+                query.Page.CurrPage = 1;
+                query.Page.NumAPage = $"1000";
+                var devNum = obj.DevNum;
+                /*组织参数*/
+                var tableStr = "TS_#time#_#devid#";
+                if (obj.TimeType == (int)TimeType.天)
+                    tableStr = tableStr.Replace("#time#", "h1");
+                else if (obj.TimeType == (int)TimeType.月)
+                    tableStr = tableStr.Replace("#time#", "day");
+                tableStr = tableStr.Replace("#devid#", GetTbNum(int.Parse(devNum)));
+
+                var table = new Tuple<string, string>("#table#", tableStr.ToString());
+                var col = new Tuple<string, string>("#col#", "v" + GetCol(int.Parse(devNum)));
+                var where = " and timeid>='" + obj.StartTime + "' and timeid<='" + DateTime.Parse(obj.EndTime).ToString("yyyy-MM-dd 23:00:00") + "'";
+                var whereStr = new Tuple<string, string>("#andStr#", where);
+                var pageStr = new Tuple<string, string>("#NumAPage#", obj.Page.NumAPage.ToString());
+                var pageCurr = new Tuple<string, string>("#CurrPage#", obj.Page.CurrPage.ToString());
+                var res = EnergyDataHandle.GetEnergyDatas(col, table, whereStr, pageStr, pageCurr);
+                result.DevList = new List<ResultEnergyData>();
+                var i = 0;
+                var baseId = (int.Parse(obj.Page.NumAPage)) * (obj.Page.CurrPage - 1);
+                foreach (EnergyData p in res)
+                {
+                    var resultEnergyData = new ResultEnergyData();
+                    resultEnergyData.Cname = obj.Cname;
+                    resultEnergyData.DevNum = int.Parse(obj.DevNum);
+                    resultEnergyData.EnergyName = ((EnergyType)obj.EnergyType).ToString();
+                    resultEnergyData.Time = p.TiemId.ToString("yyyy-MM-dd HH:mm:ss");
+                    resultEnergyData.Val = decimal.Round(p.Val, 2);
+                    resultEnergyData.Id = i++;
+                    resultEnergyData.Id += baseId;
+                    result.DevList.Add(resultEnergyData);
+
+                }
+                result.Exception = new ExceptionMsg { Exsg = "", Success = true };
+            }
+            catch (Exception ed)
+            {
+                result.Exception = new ExceptionMsg { Exsg = ed.Message, Success = false };
+            }
+            HttpRuntime.Cache.Insert(JsonConvert.SerializeObject(query), result);
+        }
 
         public string GetPageInfo(QueryEnergyStatistic queryObj)
         {

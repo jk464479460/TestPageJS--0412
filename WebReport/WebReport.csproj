@@ -80,6 +80,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="html\HTMLPage2.htm" />
+    <Content Include="html\chart.htm" />
     <Content Include="html\Page1.htm" />
     <Content Include="html\Page2.htm" />
     <Content Include="html\Page3.htm" />
@@ -91,6 +92,7 @@
     <Content Include="img\logo.swf" />
     <Content Include="img\logo_font.jpg" />
     <Content Include="img\logo副本.swf" />
+    <Content Include="js\chart\chart.js" />
     <Content Include="js\view\cookie.js" />
     <Content Include="js\images\ui-bg_glass_100_f6f6f6_1x400.png" />
     <Content Include="js\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
@@ -133,6 +135,7 @@
     <Content Include="js\view\Page1.js" />
     <Content Include="js\view\Page2.js" />
     <Content Include="js\view\Page3.js" />
+    <Content Include="js\view\Pagechart.js" />
     <Content Include="Login.htm" />
     <Content Include="Service\EnergyDataService.svc" />
     <Content Include="Service\ReportDataView.svc" />
