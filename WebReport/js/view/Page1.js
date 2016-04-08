@@ -139,7 +139,7 @@
     });
 
     $("#jumpChart").click(function() {
-        window.open("html/chart.htm?key=" + iputStrGlobal, "_blank");
+        window.open("chart.htm?key=" + iputStrGlobal, "_blank");
     });
 });//end-load
 
