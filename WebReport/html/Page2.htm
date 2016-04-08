@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>数据报表</title>
+    <link type="text/css" rel="stylesheet" href="../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/style.css"/>
+
+    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui-1.8.custom.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.ui.selectmenu.js"></script>
+   
+    <script type="text/javascript" src="../js/template.min.js"></script>
+    <script type="text/javascript" src="../js/layer/layer.min.js"></script>
+    <script type="text/javascript" src="../js/view/intelligence.js"></script>
+     <script type="text/javascript" src="../js/view/cookie.js"></script>
+</head>
+<body>
+     <div class="header" style="display:none">
+        <div>
+            <div style="float:left;margin-top:5px;margin-left:80px;">
+                <object>
+                    <embed src="../img/logo副本.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" height="45" width="105">
+                </object>
+                </div>
+            <div style="float:left;display:inline;margin-top:10px;"><img src="../img/logo_font.jpg"/></div>
+            <div class="alarm">
+                <img class="alarm" src="../img/alarm.jpg"/>
+            </div>
+              <div class="logOut">
+                <a id="loginOut" href="../Login.htm">退出</a>
+            </div>
+        </div>
+    </div>
+    <div  class="max1"> <ul id="menu1" >
+                            <li  class="sec2"><a href="http://www.lianfa.cn/news.aspx" class="menu_index">新闻中心</a></li>
+                            <li  class="sec1"><a href="/html/page2.htm" class="menu_index">数据报表</a></li>
+                            <li  class="sec1"><a href="/html/page1.htm" class="menu_index">数据修复</a></li>
+                            </ul></div>
+    <!--main-->
+    <div id="content">
+        <div id="operTab">
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width:10%;display: none;">
+                            <input type="text" id="abc" value="输入设备" size="10"> 
+                        </td>
+                        <td style="width:20%;border-left: #2e8b57 solid 1px;">
+                            <label>时间类型:&nbsp;&nbsp;</label>
+                            <select id="timeType"><option value="1">天</option>
+                                <option value="2">月</option>   
+                            </select>
+                        </td>
+                       
+                        <td style="border-left: #2e8b57 solid 1px;width:25%;">
+                            <label>报表时间:&nbsp;&nbsp;&nbsp;<input type="text" id="startDate" style="width: 80px;"/></label>
+                            <select id="hourSel" style="float:right;">
+                                <option value="00" selected="selected">0时</option> 
+                                <option value="01">1时</option> 
+                                <option value="02">2时</option> 
+                                <option value="03">3时</option> 
+                                <option value="04">4时</option> 
+                                <option value="05">5时</option> 
+                                <option value="06">6时</option> 
+                                <option value="07">7时</option> 
+                                <option value="08">8时</option> 
+                                <option value="09">9时</option> 
+                                <option value="10">10时</option> 
+                                <option value="11">11时</option> 
+                                <option value="12">12时</option> 
+                                <option value="13">13时</option> 
+                                <option value="14">14时</option> 
+                                <option value="15">15时</option> 
+                                <option value="16">16时</option> 
+                                <option value="17">17时</option> 
+                                <option value="18">18时</option> 
+                                <option value="19">19时</option> 
+                                <option value="20">20时</option> 
+                                <option value="21">21时</option> 
+                                <option value="22">22时</option> 
+                                <option value="23">23时</option> 
+                            </select>
+                        </td>
+                        <td style="border-left: #2e8b57 solid 1px;width:20%;display: none;"><label>结束时间:&nbsp;&nbsp;&nbsp;</label><input type="text" id="endDate" style="width: 90px;"/>
+                            <select id="Select1">
+                                 <option value="00" selected="selected">0时</option> 
+                                <option value="01">1时</option> 
+                                <option value="02">2时</option> 
+                                <option value="03">3时</option> 
+                                <option value="04">4时</option> 
+                                <option value="05">5时</option> 
+                                <option value="06">6时</option> 
+                                <option value="07">7时</option> 
+                                <option value="08">8时</option> 
+                                <option value="09">9时</option> 
+                                <option value="10">10时</option> 
+                                <option value="11">11时</option> 
+                                <option value="12">12时</option> 
+                                <option value="13">13时</option> 
+                                <option value="14">14时</option> 
+                                <option value="15">15时</option> 
+                                <option value="16">16时</option> 
+                                <option value="17">17时</option> 
+                                <option value="18">18时</option> 
+                                <option value="19">19时</option> 
+                                <option value="20">20时</option> 
+                                <option value="21">21时</option> 
+                                <option value="22">22时</option> 
+                                <option value="23">23时</option> 
+                            </select>
+                        </td>
+                        <td style="border-left: #2e8b57 solid 1px;width:22px;"><input id="btQuery" type="button" value="查询"/></td>
+                        <td style="border-left: #2e8b57 solid 1px;width:22px;"><input id="btExport" type="button" value="导出"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr><th>序号</th>
+                        <th>名称</th>
+                        <th>能源类型</th>
+                        <th>开始值</th>
+                        <th>结束值</th>
+                        <th>实际值</th>
+                    </tr>
+                </thead>
+                <tbody id="tpl"></tbody>
+            </table>
+            
+            <div id="navPage">
+                总【<span id="totalPage"></span>】页,
+                当前【<span id="currPage"></span>】页,
+                单页<input type="text" style="width:22px;" id="num" value="40"/>条,
+                <a id="firstPage" href="javascript:void(0)">首页</a>,
+                <a id="previousPage" href="javascript:void(0)">上一页</a>,
+                <a id="nextPage" href="javascript:void(0)">下一页</a>,
+                <a id="lastPage" href="javascript:void(0)">尾页</a>,
+                跳第<input id="numPage" type="text" style="width:40px;"/>页
+                <input id="GetSpeciPage" type="button" value="确定"/>
+            </div>
+        </div>
+    </div>
+   
+    <script id="dataItem" type="text/html">
+        <%for(i = 0; i < DevList.length; i++) {%>
+        <%if(i%2==0){%>
+        <tr class="TrDouble"><td><%==DevList[i].Id %></td>
+            <td><%==DevList[i].Cname %></td>
+            <td><%==DevList[i].EnergyName %></td>
+            <td><%==DevList[i].MonthStart %></td>
+            <td><%==DevList[i].MonthEnd %></td>
+            <td><%==DevList[i].Val %></td>
+        </tr>
+        <%}%>
+        <%if(i%2!=0){%>
+        <tr class="TrOdd"><td><%==DevList[i].Id %></td>
+            <td><%==DevList[i].Cname %></td>
+            <td><%==DevList[i].EnergyName %></td>
+            <td><%==DevList[i].MonthStart %></td>
+            <td><%==DevList[i].MonthEnd %></td>
+            <td><%==DevList[i].Val %></td>
+
+        </tr>
+        <%}%>
+        <%}%>
+    </script>
+
+    <script type="text/javascript" src="../js/view/Page2.js"></script>
+    
+</body>
+</html>

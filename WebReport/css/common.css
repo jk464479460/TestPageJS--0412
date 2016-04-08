@@ -1,0 +1,111 @@
+﻿html {
+    height: 100%;  
+}
+body 
+{
+    margin: 0 auto;
+	padding: 0;
+	height: 100%;
+    background-color: #CCE8CF;
+    background-image: url('../img/bgcontext.jpg'); width: 998px;height: 100%;
+    align-content: center;
+}
+
+.header {
+    background: url("../img/context.jpg") repeat scroll 0 0 transparent;
+    height: 68px;
+    width: 100%;
+}
+.header:before,
+.header:after {
+    content: "";
+    display: table;
+    line-height: 0;
+    clear: both;
+}
+ .brand {
+    background: url("../img/logo.png") no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 28px;
+    margin: 19px 0 0 40px;
+    width: 150px;
+ }
+ 
+ .menu {
+    background-color:#CDAA7D;
+    border-bottom: 1px solid #aba7ac;
+    height: 80px;
+ }
+ 
+ table {
+    border: 1px solid #cdcdcd;
+    text-align: center;
+     vertical-align: baseline;
+     width: 100%;
+}
+th {
+    background: none repeat scroll 0 0 transparent;
+    border: 1px solid #cdcdcd;
+    padding: 10px;
+}
+
+ #content {
+   background: url("../img/context.jpg") repeat scroll 0 0 transparent;
+    clear: both;
+     margin-top: 2px;
+    min-height: 100%;
+    overflow: hidden;
+    padding: 0;
+     width: 100%;
+ }
+ 
+ .alarm {
+     display: inline;
+     float: right;
+     height: 36px;
+     margin-right: 100px;
+     width: 16px;
+ }
+ 
+ .max1 {
+    height: 35px;
+    margin-top: -15px;
+    padding: 0;
+    width: 100%;
+    background: url("../img/context.jpg") repeat scroll 0 0 transparent;
+}
+#menu1 {
+    margin-left: 0;
+    width: 883px;
+}
+
+#menu1 li {
+    color: White;
+    display: table;
+    float: left;
+    font-size: 12pt;
+    height: 1.8em;
+    line-height: 1.8em;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
+    width: 16%;
+}
+
+.sec1,.sec2 {
+    background-image: url("../img/block2.jpg");
+}
+
+.menu_index:link, .menu_index:visited, .menu_index:active {
+    color: White;
+    text-decoration: none;
+}
+
+.logOut {
+    color: White;
+    text-decoration: none;
+    margin-top: 20px;
+    float: right;
+    font-size: 12px;
+}

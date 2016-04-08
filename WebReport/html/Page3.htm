@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>test2</title>
+    <link type="text/css" rel="stylesheet" href="../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/style.css"/>
+
+    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui-1.8.custom.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.ui.selectmenu.js"></script>
+   
+    <script type="text/javascript" src="../js/template.min.js"></script>
+    <script type="text/javascript" src="../js/layer/layer.min.js"></script>
+    <script type="text/javascript" src="../js/view/intelligence.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div style="float:left;margin-top:5px;margin-left:80px;">
+                <object>
+                    <embed src="../img/logo.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" height="45" width="105">
+                </object>
+                </div>
+            <div style="float:left;display:inline;margin-top:10px;"><img src="../img/logo_font.jpg"/></div>
+            <div class="alarm">
+                <img class="alarm" src="../img/alarm.jpg"/>
+            </div>
+        </div>
+    </div>
+    <div class="menu" style="display:none;"></div>
+    <!--main-->
+    <div id="content">
+        <div id="operTab">
+            <table>
+                <tbody>
+                    <tr>
+                       
+                        <td style="border-left: #2e8b57 solid 1px;width:20%;">
+                            <label>开始时间:&nbsp;&nbsp;&nbsp;<input type="text" id="startDate" style="width: 90px;"/></label>
+                            
+                        </td>
+                        <td style="border-left: #2e8b57 solid 1px;width:20%;"><label>结束时间:&nbsp;&nbsp;&nbsp;</label><input type="text" id="endDate" style="width: 90px;"/>
+                            
+                        </td>
+                        <td style="border-left: #2e8b57 solid 1px;width:22px;"><input id="btQuery" type="button" value="查询"/></td>
+                        <td style="border-left: #2e8b57 solid 1px;width:22px;"><input id="btExport" type="button" value="导出"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr><th>序号</th>
+                        <th>名称</th>
+                        <th>能源类型</th>
+                        <th>开始值</th>
+                        <th>结束值</th>
+                        <th>实际值</th>
+                    </tr>
+                </thead>
+                <tbody id="tpl"></tbody>
+            </table>
+            
+            <div id="navPage">
+                总【<span id="totalPage"></span>】页,
+                当前【<span id="currPage"></span>】页,
+                单页<input type="text" style="width:22px;" id="num" value="40"/>条,
+                <a id="firstPage" href="javascript:void(0)">首页</a>,
+                <a id="previousPage" href="javascript:void(0)">上一页</a>,
+                <a id="nextPage" href="javascript:void(0)">下一页</a>,
+                <a id="lastPage" href="javascript:void(0)">尾页</a>,
+                跳第<input id="numPage" type="text" style="width:40px;"/>页
+                <input id="GetSpeciPage" type="button" value="确定"/>
+            </div>
+        </div>
+    </div>
+   
+    <script id="dataItem" type="text/html">
+        <%for(i = 0; i < DevList.length; i++) {%>
+        <%if(i%2==0){%>
+        <tr class="TrDouble"><td><%==DevList[i].Id %></td>
+            <td><%==DevList[i].Cname %></td>
+            <td><%==DevList[i].EnergyName %></td>
+            <td><%==DevList[i].MonthStart %></td>
+            <td><%==DevList[i].MonthEnd %></td>
+            <td><%==DevList[i].Val %></td>
+        </tr>
+        <%}%>
+        <%if(i%2!=0){%>
+        <tr class="TrOdd"><td><%==DevList[i].Id %></td>
+            <td><%==DevList[i].Cname %></td>
+            <td><%==DevList[i].EnergyName %></td>
+            <td><%==DevList[i].MonthStart %></td>
+            <td><%==DevList[i].MonthEnd %></td>
+            <td><%==DevList[i].Val %></td>
+
+        </tr>
+        <%}%>
+        <%}%>
+    </script>
+
+    <script type="text/javascript" src="../js/view/Page3.js"></script>
+    
+</body>
+</html>

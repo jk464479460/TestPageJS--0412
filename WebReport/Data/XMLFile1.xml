@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlList>
+  <Sql Name="GetPageNums">
+    <![CDATA[
+      select count(*)  as num
+         from #table#   where 1=1    #andStr#
+    ]]>
+  </Sql>
+
+  <Sql Name="GetEnergyData">
+    <![CDATA[
+     declare @NumAPage int, @CurrPage int
+     set @NumAPage=#NumAPage#;
+     set @CurrPage =#CurrPage#;
+      select top (@NumAPage)  #col# as val , timeid  as timeid
+      from #table#  where timeid not  in(
+         select top ((@NumAPage)*(@CurrPage-1))  timeid  as timeid
+         from #table#   where 1=1  #andStr# order by timeid)
+       #andStr#  order by timeid
+    ]]>
+  </Sql>
+  <Sql Name="GetEnergyDataNew">
+    <![CDATA[
+     select #col# as val , timeid  as timeid 
+         from #table#   where 1=1  #andStr# order by timeid
+    ]]>
+  </Sql>
+  
+  <Sql Name="GetDevList">
+    <![CDATA[
+      select devicenum,devicename as cname
+      from tb_device where 1=1  #andStr#
+    ]]>
+  </Sql>
+
+  <Sql Name="UpdaeInsertEnergyData">
+    <![CDATA[
+      
+    if exists(select * from #table# where 1=1 #andStr#  --timeid>='2015/12/1 0:00:00' and timeid<='2015-12-01 23:00:00' 
+    )
+    update #table# set #col#=#colVal# where  1=1 #andStr# --timeid>='2015/12/1 0:00:00' and timeid<='2015-03-01 23:00:00' 
+    else
+    insert into #table#(#col#,timeid) values(#colVal#,'#timeid#')
+    select a=3;
+    ]]>
+  </Sql>
+
+  <Sql Name="GetEnergyMonthData">
+    <![CDATA[
+      
+    select #col# as val, timeid from #table# where 1=1  #andStr# order by timeid
+    ]]>
+  </Sql>
+</SqlList>
